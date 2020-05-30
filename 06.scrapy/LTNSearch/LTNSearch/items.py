@@ -7,11 +7,12 @@
 
 import scrapy
 
-class PchomesearchItem(scrapy.Item):
+class LtnsearchItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    title = scrapy.Field()
-    link = scrapy.Field() 
-    desc = scrapy.Field() 
-    price = scrapy.Field()
     #pass
+    title = scrapy.Field()
+    link = scrapy.Field()
+    body = scrapy.Field()
+    postdate = scrapy.Field()
+
