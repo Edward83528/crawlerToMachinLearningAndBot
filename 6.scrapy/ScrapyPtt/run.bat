@@ -1,0 +1,1 @@
+scrapy crawl ptt -a b=Gossiping -a p=2

@@ -1,0 +1,1 @@
+scrapy crawl AppleDailySearch -a k=к═кв -a s=2020-04-14 -a e=2020-04-15 -a p=1
