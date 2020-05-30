@@ -1,1 +1,0 @@
-scrapy crawl AppleDailySearch -a k=¤t´¶ -a s=2018-07-01 -a e=2018-07-19 -a p=1

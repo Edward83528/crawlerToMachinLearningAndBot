@@ -1,1 +1,0 @@
-scrapy crawl LTNSearch -a k=¤K¥P¹ÐÃz -a s=2015-06-27 -a e=2015-08-24 -a p=2
