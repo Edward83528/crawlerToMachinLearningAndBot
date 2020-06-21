@@ -15,7 +15,6 @@
 | 12.MachineLearning | 爬蟲的資料應用在機器學習 | [連結](https://github.com/harry83528/crawlerToMachinLearningAndBot/tree/master/12.MachineLearning "MachineLearning") |
 
 
-
     > ## 判斷xpath
     > 
     > 1.   適合-table、有定義div、span
