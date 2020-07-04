@@ -70,7 +70,7 @@ def parseLtnNews(uri):
     link = []
     title = []
     body = []
-    for ul_soup in soup.findAll('ul',attrs={"id":"newslistul"}):
+    for ul_soup in soup.findAll('ul',attrs={"class":"searchlist boxTitle"}):
         for span_soup in ul_soup.findAll('span'):
             pd = span_soup.string.replace("&nbsp;","")[:10]
             postdate.append(pd)
