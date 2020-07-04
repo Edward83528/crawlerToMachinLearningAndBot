@@ -1,4 +1,8 @@
-本專案python爬蟲實戰說明
+## 本專案貢獻   
+    >>機器學習與深度學習NLP步驟如下:<br>
+    >資料蒐集(爬蟲) -> 資料清理 -> 特徵工程 -> NLP建模 -> 寫成API放到server<br>
+    >本專案會帶你從頭了解到NLP建模型
+## 本專案python爬蟲實戰說明
 | 單元 | 說明 | 快速連結 |
 | :-----| :---- | :----: |
 | 01.python_review | 如果您還對python不是那麼熟悉，本單元可讓您迅速學會基本python | [連結](https://github.com/harry83528/crawlerToMachinLearningAndBot/tree/master/01.python_review "python_review") |
@@ -15,6 +19,8 @@
 | 12.MachineLearning | 爬蟲的資料應用在機器學習 | [連結](https://github.com/harry83528/crawlerToMachinLearningAndBot/tree/master/12.MachineLearning "MachineLearning") |
 
 
-    > 判斷xpath
+    >>判斷xpath
     > 1.   適合-table、有定義div、span
-    > 2.   不適合才用split()-橫向排版、左右排列
+    > 2.   不適合-橫向排版、左右排列(才用split())
+    > 3.   當然你也可以直接用beautifulSoup做解析
+    
