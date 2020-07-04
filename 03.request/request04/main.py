@@ -8,7 +8,8 @@ def request_uri(uri,name,password):
     try:
         header = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0'}
         data = {"name":name,"password":password}
-        rs = requests.session()
+        rs = requests.session() # requests.session() 通過 Session 建一個連線
+        # 往下使用requests的地方，直接使用session即可，session就会保存server發送過來的cookie信息
         res = rs.post(uri, data=data, headers=header)
         res = rs.get('http://jumpin.cc/HelloForm/content.php')
         html_data =  res.text

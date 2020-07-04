@@ -7,8 +7,8 @@ def request_uri(uri,name,password):
     html_data = ''
     try:
         header = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0'}
-        data = {"name":name,"password":password}
-        res = requests.post(uri, data=data, headers=header)
+        data = {"name":name,"password":password} # post 帳密資訊
+        res = requests.post(uri, data=data, headers=header) # headers模擬瀏覽器
         html_data =  res.text
     except Exception as e:
         print(str(e))
@@ -24,3 +24,4 @@ def start_requests(uri,name,password):
 if __name__ == '__main__':
     start_requests('http://jumpin.cc/HelloForm/post.php','David','1234');
     print("Done")
+

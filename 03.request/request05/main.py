@@ -42,7 +42,7 @@ def start_requests():
         urls = []
         for i in range(1,int(pages)+1):
             str_idx = ''+('%s' % i)
-            urls.append('http://news.ltn.com.tw/search?keyword='+keyword+'&conditions=and&SYear='+SYear+'&SMonth='+SMonth+'&SDay='+SDay+'&EYear='+EYear+'&EMonth='+EMonth+'&EDay='+EDay+'&page='+str_idx+'')
+            urls.append('http://news.ltn.com.tw/search?keyword='+quote(keyword)+'&conditions=and&SYear='+SYear+'&SMonth='+SMonth+'&SDay='+SDay+'&EYear='+EYear+'&EMonth='+EMonth+'&EDay='+EDay+'&page='+str_idx+'')
 
         for url in urls:
             print (url)
@@ -54,15 +54,18 @@ def start_requests():
 
 def request_uri(uri):
     header = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0)'}
-    rs = requests.session()
-    res = rs.get(uri, headers=header)
+    rs = requests.session() # requests.session() 通過 Session 建一個連線
+    # 往下使用requests的地方，直接使用session即可，session就会保存server發送過來的cookie信息
+    res = rs.get(uri,headers=header)
     html_data =  res.text
     return html_data
 
 
 def parseLtnNews(uri):
-    html_data =  request_uri(uri)
-    aryTemp01 = html_data.split('class="searchlist">')
+    handle = urllib.request.urlopen(uri)
+    encoding = handle.headers.get_content_charset()
+    html_data =  handle.read().decode(encoding)
+    aryTemp01 = html_data.split('class="searchlist boxTitle"')
     if len(aryTemp01)>1:
         for a in aryTemp01[1].split('<li>'):
             title = ''
@@ -70,19 +73,16 @@ def parseLtnNews(uri):
             body = ''
             postdate = ''
             aryTemp02 = a.split('<p>')
-            if len(aryTemp02)>2:
-                aryTemp03 = aryTemp02[1].split('</p>')
-                title = aryTemp03[0].replace('<strong>','').replace('</strong>','')
-                print(title)
-                #aryTemp03 = aryTemp02[2].split('</p>')
-                #body = "".join(aryTemp03[0].split("\n")).replace("</strong>","")
-                #body = body.replace("<strong>","")
+            if len(aryTemp02)>1:
+                body = aryTemp02[1].split('</p>')[0].replace("\n","").replace("<strong>","").replace("</strong>","")
                 #print(body)
             aryTemp02 = a.split('class="tit" href="')
             if len(aryTemp02)>1:
+                title = aryTemp02[1].split('">')[1].split("</a>")[0].replace("\n","").replace("<strong>","").replace("</strong>","")
+                print(title)
                 aryTemp03 = aryTemp02[1].split('"')
-                link = "http://news.ltn.com.tw/"+aryTemp03[0]
-                #print(link)
+                link = aryTemp03[0]
+                print(link)
                 html_data2 = request_uri(link)
                 if 'data-desc="內文">' in html_data2:
                         aryTemp02 = html_data2.split('data-desc="內文">')
@@ -194,11 +194,10 @@ def parseLtnNews(uri):
                             body = ' '.join(tmpBody)
                     if(str(body)==''):
                         print(link)
-
             aryTemp02 = a.split('<span>')
             if len(aryTemp02)>1:
                 postdate = aryTemp02[1].split('</span>')[0].replace("&nbsp;","")[:10]
-                #print(postdate)
+                print(postdate)
             if len(title)>1:
                 items.append({
                     "title": title,
@@ -208,8 +207,6 @@ def parseLtnNews(uri):
                     #"updatetime":datetime.datetime.now(),  # MongoDB
                     "updatetime":datetime.datetime.now().strftime('%Y-%m-%d')
                     })
-
-
 
 
 if __name__ == '__main__':
